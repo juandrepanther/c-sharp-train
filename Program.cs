@@ -2,66 +2,52 @@
 
 namespace NumberGuesser
 {
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            //string name = "Hello";
-            //int age = 4;
+	class Program
+	{
+		static void Main(string[] args)
+		{
+			string appName = "Number Guesser";
+			string appVersion = "1.0.0";
+			string appAuthor = "Johny";
 
-            //Console.WriteLine(name + " Johny, my age is {0}", age);
+			Console.ForegroundColor = ConsoleColor.Green;
+			Console.WriteLine("{0}: Version {1} by {2}", appName, appVersion, appAuthor);
+			Console.ResetColor();
 
-            string appName = "Number Guesser";
-            string appVersion = "1.0.0";
-            string appAuthor = "Johny";
+			Console.WriteLine("What is your name");
 
-            Console.ForegroundColor = ConsoleColor.Green;
+			string inputName = Console.ReadLine() ?? string.Empty;
+			Console.WriteLine("Hello {0}", inputName);
 
-            Console.WriteLine("{0}: Version {1} by {2}", appName, appVersion, appAuthor);
+			// set target number as a random number
+			Random random = new();
+			int correctNumber = random.Next(1, 10);
 
-            Console.ResetColor();
+			int guess = 0;
+			Console.WriteLine("What is correct number? Between 1 and 10");
 
-            Console.WriteLine("What is your name");
+			while (guess != correctNumber)
+			{
+				string input = Console.ReadLine() ?? string.Empty;
 
-            string inputName = Console.ReadLine() ?? string.Empty;
+				// check if input is a number type
+				if (!int.TryParse(input, out guess))
+				{
+					Console.WriteLine("Please enter a number, not a letter");
+					continue;
+				}
 
-            Console.WriteLine("Hello {0}", inputName);
+				guess = Int32.Parse(input);
 
-            //int correctNumber = 7; 
+				if (guess != correctNumber)
+				{
+					Console.WriteLine("Wrong number. Please try again!");
+				}
+			}
 
-            Random random = new();
-            int correctNumber = random.Next();
-
-            int guess = 0;
-
-            Console.WriteLine("WHat is correct number?");
-
-            while (guess != correctNumber)
-            {
-                string input = Console.ReadLine() ?? string.Empty;
-
-                if (!int.TryParse(input, out guess))
-                {
-                    Console.WriteLine("PLease enter a number, not letter");
-
-                    continue;
-                }
-
-                guess = Int32.Parse(input);
-
-                if (guess != correctNumber)
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-
-                    Console.WriteLine("Wrong number. Please try again!");
-
-                    Console.ResetColor();
-                }
-            }
-
-            Console.WriteLine("Bingo");
-        }
-    }
+			Console.WriteLine("Bingo");
+		}
+	}
 }
 
 // commenting shortcut is Ctrl + K + C
